@@ -1,0 +1,39 @@
+<%= form_with(model: noticia) do |form| %>
+  <% if noticia.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(noticia.errors.count, "error") %> proibiu que esta noticia fosse salva:</h2>
+
+      <ul>
+        <% noticia.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <%= form.label :titulo, style: "display: block", class: "form-label" %>
+      <%= form.text_field :titulo, class: "form-label" %>
+    </div>
+
+    <div class="col-12">
+      <%= form.label :texto, style: "display: block", class: "form-label" %>
+      <%= form.text_area :texto, class: "form-label" %>
+    </div>
+
+    <div class="col-12">
+      <%= form.label :content, style: "display: block", class: "form-label" %>
+      <%= form.rich_text_area :content, class: "form-label" %>
+    </div>
+
+    <div class="col-12">
+      <%= form.label :arquivo, style: "display: block", class: "form-label" %>
+      <%= form.text_field :arquivo, class: "form-label" %>
+    </div>
+
+    <div class="col-12">
+      <%= form.submit class: 'btn btn-outline-success rounded-pill'  %>
+    </div>
+  </div>
+<% end %>

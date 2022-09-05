@@ -1,0 +1,64 @@
+<%= render :partial => '/layouts/caroussel' %>
+
+<!-- ============= COMPONENT ============== -->
+<nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark" style="background-color: #045B93;">
+ <div class="container">
+ 	<%= link_to root_path do %>
+        <%= image_tag "logos/logo_hegv_background_none.png", :class => "mx-1" %>
+    <% end %> 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse justify-content-center" id="main_nav">
+	
+
+	<ul class="navbar-nav">
+        <li class="nav-item">
+        <%= link_to "Home", root_path, class: "nav-link active" %>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="manuaisProcedimentos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Manuais e Procedimentos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="manuaisProcedimentos">
+            <li><a class="dropdown-item" href="#">POP's</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Lista de Presença", "assets/documents/nep_lista_de_presenca.pdf", target:"_blank", class:"dropdown-item" %></li>
+            <li><%= link_to "Formulário de Solicitação de acesso", "assets/documents/ti_solicitacao_de_acesso.pdf", target:"_blank", class:"dropdown-item" %></li>
+            <li><%= link_to "Ocorrência de Ponto", "assets/documents/dp_ocorrencia_de_ponto.pdf", target:"_blank", class:"dropdown-item" %></li>
+            <li><%= link_to "Formulário de Troca de Plantão", "assets/documents/dp_solicitacao_de_troca_de_plantao.pdf", target:"_blank", class:"dropdown-item" %></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="comunicaoesEventos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Comunicação e Eventos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="comunicaoesEventos">
+            <li><a class="dropdown-item" href="#">Notícias</a></li>
+            <li><a class="dropdown-item" href="#">Comunicados</a></li>
+            <li><a class="dropdown-item" href="#">Eventos</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <%= link_to "Campus Virtual", "http://10.42.68.6/", target:"_blank", class:"nav-link" %> 
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="linksUteis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Links Úteis
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="linksUteis">
+            <li><small><%= link_to "TI Med - HEGV", "http://10.42.69.4:8080/vitai/pages/login.do", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><%= link_to "TI Med - UPA", "http://10.42.169.5:8080/vitai/pages/login.do", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><%= link_to "LisNet", "https://ultraimagem.lisnet.com.br/laudos/#u", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><%= link_to "GLPI - Central de Soluções", "http://centraldesolucoes.cesp/glpi/", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><%= link_to "Zamed - Logística", "https://ipcep.zamedsaude.com.br/", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><%= link_to "CadWeb", "https://cadastro.saude.gov.br/segcartao/?contextType=external&username=string&contextValue=%2Foam&password=sercure_string&challenge_url=https%3A%2F%2Fcadastro.saude.gov.br%2Fsegcartao&request_id=-690881192035479294&authn_try_count=0&locale=pt_BR&resource_url=http%253A%252F%252Fcadastro.saude.gov.br%252Fnovocartao%252Frestrito%252FusuarioConsulta.jsp", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><%= link_to "Exames de Imagem", "https://laudos.mobilemed.com.br/login", target:"_blank", class:"dropdown-item" %></small></li>
+            <li><small><a class="dropdown-item" href="#">Ramais</a></small></li>
+            </ul>
+        </li>
+    </ul>
+
+  </div> <!-- navbar-collapse.// -->
+ </div> <!-- container-fluid.// -->
+</nav>

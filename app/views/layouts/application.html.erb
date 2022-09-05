@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <title>HEGV - CESP</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(){
+        
+        window.addEventListener('scroll', function() {
+            
+          if (window.scrollY > 500) {
+            document.getElementById('navbar_top').classList.add('fixed-top');
+            // add padding top to show content behind navbar
+            navbar_height = document.querySelector('.navbar').offsetHeight;
+            document.body.style.paddingTop = navbar_height + 'px';
+          } else {
+            document.getElementById('navbar_top').classList.remove('fixed-top');
+            // remove padding top from body
+            document.body.style.paddingTop = '0';
+          } 
+        });
+      }); 
+      // DOMContentLoaded  end
+    </script>
+
+    <style type="text/css">
+      .fixed-top {
+          top: -40px;
+          transform: translateY(40px);
+          transition: transform .3s;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <%= render :partial => '/layouts/header' %>
+    <%= yield %>
+    <%= render :partial => '/layouts/footer' %>
+  </body>
+</html>

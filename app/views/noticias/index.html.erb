@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+<main class="container mb-4">
+  
+  <div class="row mb-2 mt-4">
+    <%= render :partial => '/noticias/layoutsBlog/principaisBlogs' %>
+  </div>
+
+  <div class="row g-5">
+    <div class="col-md-8">
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-success  rounded-pill" %>
+      </h3>
+
+      <% @noticias.each do |noticia| %>
+        <%= render noticia %>
+        <div class="mb-4">
+          <p>
+            <%= link_to "Mostrar", noticia, class:"btn btn-outline-info rounded-pill" %>
+          </p>
+        </div>
+      <% end %>
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
+        <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
+      </nav>
+
+    </div>
+    <%= render :partial => '/noticias/layoutsBlog/sideBlog' %>
+  </div>
+
+</main>
