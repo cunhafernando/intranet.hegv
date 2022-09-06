@@ -1,0 +1,2 @@
+module JornaisHelper
+end

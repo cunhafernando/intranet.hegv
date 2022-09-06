@@ -1,22 +1,18 @@
 <div class="container">
-  
-  
   <div class="row align-items-center mt-5">
       <div class="col-3">
       
       </div>
       <div class="col-6">
-        <h1>Novo Notícia</h1>
+        <h1>Novo Jornal</h1>
       </div>
       <div class="col-3">
       
       </div>
   </div>
-  <%= render "form", noticia: @noticia %>
-
+  <%= render "form", jornal: @jornal %>
   <br>
 
-    <%= link_to "Voltar", noticias_path, class:"btn btn-outline-primary  rounded-pill mb-3" %>
+    <%= link_to "voltar", jornais_path, class:"btn btn-outline-primary  rounded-pill mb-3" %>
   </div>
 </div>
-

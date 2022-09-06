@@ -11,25 +11,20 @@
     </div>
   <% end %>
 
-  <div class="row justify-content-center">
-    <div class="col-12">
+  <div class="mb-3">
+    <div class="col-12 mb-3">
       <%= form.label :titulo, style: "display: block", class: "form-label" %>
-      <%= form.text_field :titulo, class: "form-label" %>
+      <%= form.text_field :titulo, class: "form-control" %>
     </div>
 
-    <div class="col-12">
-      <%= form.label :texto, style: "display: block", class: "form-label" %>
-      <%= form.text_area :texto, class: "form-label" %>
-    </div>
-
-    <div class="col-12">
+    <div class="col-12 mb-3">
       <%= form.label :content, style: "display: block", class: "form-label" %>
-      <%= form.rich_text_area :content, class: "form-label" %>
+      <%= form.rich_text_area :content, class: "form-control" %>
     </div>
 
-    <div class="col-12">
+    <div class="col-12 mb-3">
       <%= form.label :arquivo, style: "display: block", class: "form-label" %>
-      <%= form.text_field :arquivo, class: "form-label" %>
+      <%= form.file_field :arquivo, class: "form-control" %>
     </div>
 
     <div class="col-12">

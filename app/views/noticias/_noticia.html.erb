@@ -2,11 +2,10 @@
   <article class="blog-post">
     <h2 class="blog-post-title mb-1"><%= noticia.titulo %></h2>
     <p class="blog-post-meta">December 14, 2020 by <a href="#">Chris</a></p>
-
     <p><%= noticia.content %></p>
-
     <p>
-      <strong>Arquivo:</strong>
+      <%= image_tag(noticia.arquivo_url, width: 200) if noticia.arquivo.present? %>
+
       <%= noticia.arquivo %>
     </p>
       

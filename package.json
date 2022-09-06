@@ -9,6 +9,7 @@
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "esbuild": "^0.15.7",
+    "pdfjs": "^2.4.7",
     "sass": "^1.54.8",
     "trix": "^2.0.0-beta.0"
   },

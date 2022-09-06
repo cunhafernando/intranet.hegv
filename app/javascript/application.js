@@ -9,3 +9,4 @@ let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 })  
 import "trix"
 import "@rails/actiontext"
+
