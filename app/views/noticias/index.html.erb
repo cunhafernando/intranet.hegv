@@ -7,17 +7,28 @@
 
   <div class="row g-5">
     <div class="col-md-8">
-      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+      <!--<h3 class="pb-4 mb-4 fst-italic border-bottom">
         <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-success  rounded-pill" %>
-      </h3>
+      </h3>-->
 
       <% @noticias.each do |noticia| %>
-        <%= render noticia %>
-        <div class="mb-4">
-          <p>
-            <%= link_to "Mostrar", noticia, class:"btn btn-outline-primary rounded-pill" %>
-          </p>
+        <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                  <!--<strong class="d-inline-block mb-2 text-success">Design</strong>-->
+                  <h3 class="mb-0"><%= noticia.titulo %></h3>
+                  <div class="mb-1 text-muted"><%= noticia.created_at.strftime("%d de %B de %Y") %></div>
+                  <p class="mb-auto"><%= noticia.content.to_plain_text.truncate(180) %></p>
+                  <p class="mb-1">
+                    <%= link_to "Continue lendo", noticia, class:"btn btn-outline-primary rounded-pill" %>
+                  </p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                  <%= image_tag (noticia.arquivo_url), :class => "bd-placeholder-img", :width => "200", :height => "250" %>
+              </div>
+            </div>
         </div>
+        
       <% end %>
 
       <nav class="blog-pagination" aria-label="Pagination">

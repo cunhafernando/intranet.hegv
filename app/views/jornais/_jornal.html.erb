@@ -1,12 +1,7 @@
-	
 <div id="<%= dom_id jornal %>">
   <article class="blog-post">
     <h2 class="blog-post-title mb-1"><%= jornal.titulo %></h2>
     <p class="blog-post-meta"><%== jornal.created_at.strftime("%d de %B de %Y") %></p>
-    <p>
-      
-    </p>
-      
   </article>
 </div>
 
@@ -14,7 +9,6 @@
   <ul class="nav nav-tabs d-flex justify-content-between align-items-center text-dark p-3" >
     <li class="nav-item">
       <input type="number" id="current_page" value="1" class="d-inline form-control" />
-
       <!-- page 1 of 5 -->
       Página
       <span id="page_num"></span>
@@ -26,7 +20,6 @@
       <button class="rounded-circle p-2 border-0 btn btn-primary" id="zoom_in" data-bs-toggle="tooltip" data-bs-placement="bottom" title="zoom in" >
         <i class="bi bi-zoom-in"></i>
       </button>
-
       <button class="rounded-circle p-2 border-0 btn btn-primary" id="zoom_out" data-bs-toggle="tooltip" data-bs-placement="bottom" title="zoom out" >
         <i class="bi bi-zoom-out"></i>
       </button>

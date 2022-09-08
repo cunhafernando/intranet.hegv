@@ -1,12 +1,16 @@
 <div id="<%= dom_id noticia %>">
   <article class="blog-post">
     <h2 class="blog-post-title mb-1"><%= noticia.titulo %></h2>
-    <p class="blog-post-meta">December 14, 2020 by <a href="#">Chris</a></p>
-    <p><%= noticia.content %></p>
+    <p class="blog-post-meta"><%= noticia.created_at.strftime("%d de %B de %Y") %></p>
+    <figure class="figure float-end mb-0">
+      <%= image_tag (noticia.arquivo_url), :class => "figure-img img-fluid rounded mb-0", :width => "400" %>
+    </figure>
+    <section>
+      <p><%= noticia.content %></p>
+    </section>
     <p>
-      <%= image_tag(noticia.arquivo_url, width: 200) if noticia.arquivo.present? %>
+      
 
-      <%= noticia.arquivo %>
     </p>
       
   </article>
