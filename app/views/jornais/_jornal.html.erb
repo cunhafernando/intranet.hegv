@@ -1,6 +1,4 @@
 	
-
-
 <div id="<%= dom_id jornal %>">
   <article class="blog-post">
     <h2 class="blog-post-title mb-1"><%= jornal.titulo %></h2>
@@ -51,131 +49,130 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js" integrity="sha512-tqaIiFJopq4lTBmFlWF0MNzzTpDsHyug8tJaaY0VkcH5AR2ANMJlcD+3fIL+RQ4JU3K6edt9OoySKfCCyKgkng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-const pdf = '<%= jornal.materia %>';
+	const pdf = '<%= jornal.materia %>';
 
-const pageNum = document.querySelector('#page_num');
-const pageCount = document.querySelector('#page_count');
-const currentPage = document.querySelector('#current_page');
-const previousPage = document.querySelector('#prev_page');
-const nextPage = document.querySelector('#next_page');
-const zoomIn = document.querySelector('#zoom_in');
-const zoomOut = document.querySelector('#zoom_out');
+	const pageNum = document.querySelector('#page_num');
+	const pageCount = document.querySelector('#page_count');
+	const currentPage = document.querySelector('#current_page');
+	const previousPage = document.querySelector('#prev_page');
+	const nextPage = document.querySelector('#next_page');
+	const zoomIn = document.querySelector('#zoom_in');
+	const zoomOut = document.querySelector('#zoom_out');
 
-const initialState = {
-	pdfDoc: null,
-	currentPage: 1,
-	pageCount: 0,
-	zoom: 1,
-};
+	const initialState = {
+		pdfDoc: null,
+		currentPage: 1,
+		pageCount: 0,
+		zoom: 1,
+	};
 
-// Render the page.
-const renderPage = () => {
-	// Load the first page.
-	initialState.pdfDoc
-		.getPage(initialState.currentPage)
-		.then((page) => {
-			console.log('page', page);
+	// Render the page.
+	const renderPage = () => {
+		// Load the first page.
+		initialState.pdfDoc
+			.getPage(initialState.currentPage)
+			.then((page) => {
+				console.log('page', page);
 
-			const <%= jornal.titulo %> = document.querySelector('#<%= jornal.titulo %>');
-			const ctx = <%= jornal.titulo %>.getContext('2d');
-			const viewport = page.getViewport({
-				scale: initialState.zoom,
+				const <%= jornal.titulo %> = document.querySelector('#<%= jornal.titulo %>');
+				const ctx = <%= jornal.titulo %>.getContext('2d');
+				const viewport = page.getViewport({
+					scale: initialState.zoom,
+				});
+
+				<%= jornal.titulo %>.height = viewport.height;
+				<%= jornal.titulo %>.width = viewport.width;
+
+				// Render the PDF page into the canvas context.
+				const renderCtx = {
+					canvasContext: ctx,
+					viewport: viewport,
+				};
+
+				page.render(renderCtx);
+
+				pageNum.textContent = initialState.currentPage;
 			});
+	};
 
-			<%= jornal.titulo %>.height = viewport.height;
-			<%= jornal.titulo %>.width = viewport.width;
+	// Load the document.
+	pdfjsLib
+		.getDocument(pdf)
+		.promise.then((data) => {
+			initialState.pdfDoc = data;
+			console.log('pdfDocument', initialState.pdfDoc);
 
-			// Render the PDF page into the canvas context.
-			const renderCtx = {
-				canvasContext: ctx,
-				viewport: viewport,
-			};
+			pageCount.textContent = initialState.pdfDoc.numPages;
 
-			page.render(renderCtx);
-
-			pageNum.textContent = initialState.currentPage;
+			renderPage();
+		})
+		.catch((err) => {
+			alert(err.message);
 		});
-};
 
-// Load the document.
-pdfjsLib
-	.getDocument(pdf)
-	.promise.then((data) => {
-		initialState.pdfDoc = data;
-		console.log('pdfDocument', initialState.pdfDoc);
-
-		pageCount.textContent = initialState.pdfDoc.numPages;
-
-		renderPage();
-	})
-	.catch((err) => {
-		alert(err.message);
-	});
-
-const showPrevPage = () => {
-	if (initialState.pdfDoc === null || initialState.currentPage <= 1)
-		return;
-	initialState.currentPage--;
-	// Render the current page.
-	currentPage.value = initialState.currentPage;
-	renderPage();
-};
-
-const showNextPage = () => {
-	if (
-		initialState.pdfDoc === null ||
-		initialState.currentPage >= initialState.pdfDoc._pdfInfo.numPages
-	)
-		return;
-
-	initialState.currentPage++;
-	currentPage.value = initialState.currentPage;
-	renderPage();
-};
-
-// Button events.
-previousPage.addEventListener('click', showPrevPage);
-nextPage.addEventListener('click', showNextPage);
-
-// Keypress event.
-currentPage.addEventListener('keypress', (event) => {
-	if (initialState.pdfDoc === null) return;
-	// Get the key code.
-	const keycode = event.keyCode ? event.keyCode : event.which;
-
-	if (keycode === 13) {
-		// Get the new page number and render it.
-		let desiredPage = currentPage.valueAsNumber;
-		initialState.currentPage = Math.min(
-			Math.max(desiredPage, 1),
-			initialState.pdfDoc._pdfInfo.numPages,
-		);
+	const showPrevPage = () => {
+		if (initialState.pdfDoc === null || initialState.currentPage <= 1)
+			return;
+		initialState.currentPage--;
+		// Render the current page.
 		currentPage.value = initialState.currentPage;
 		renderPage();
-	}
-});
+	};
 
-// Zoom events.
-zoomIn.addEventListener('click', () => {
-	if (initialState.pdfDoc === null) return;
-	initialState.zoom *= 4 / 3;
-	renderPage();
-});
+	const showNextPage = () => {
+		if (
+			initialState.pdfDoc === null ||
+			initialState.currentPage >= initialState.pdfDoc._pdfInfo.numPages
+		)
+			return;
 
-zoomOut.addEventListener('click', () => {
-	if (initialState.pdfDoc === null) return;
-	initialState.zoom *= 2 / 3;
-	renderPage();
-});
+		initialState.currentPage++;
+		currentPage.value = initialState.currentPage;
+		renderPage();
+	};
 
-// Tooltip.
-const tooltipTriggerList = [].slice.call(
-	document.querySelectorAll('[data-bs-toggle="tooltip"]'),
-);
-const tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => {
-	return new bootstrap.Tooltip(tooltipTriggerEl);
-});
+	// Button events.
+	previousPage.addEventListener('click', showPrevPage);
+	nextPage.addEventListener('click', showNextPage);
+
+	// Keypress event.
+	currentPage.addEventListener('keypress', (event) => {
+		if (initialState.pdfDoc === null) return;
+		// Get the key code.
+		const keycode = event.keyCode ? event.keyCode : event.which;
+
+		if (keycode === 13) {
+			// Get the new page number and render it.
+			let desiredPage = currentPage.valueAsNumber;
+			initialState.currentPage = Math.min(
+				Math.max(desiredPage, 1),
+				initialState.pdfDoc._pdfInfo.numPages,
+			);
+			currentPage.value = initialState.currentPage;
+			renderPage();
+		}
+	});
+
+	// Zoom events.
+	zoomIn.addEventListener('click', () => {
+		if (initialState.pdfDoc === null) return;
+		initialState.zoom *= 4 / 3;
+		renderPage();
+	});
+
+	zoomOut.addEventListener('click', () => {
+		if (initialState.pdfDoc === null) return;
+		initialState.zoom *= 2 / 3;
+		renderPage();
+	});
+
+	// Tooltip.
+	const tooltipTriggerList = [].slice.call(
+		document.querySelectorAll('[data-bs-toggle="tooltip"]'),
+	);
+	const tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => {
+		return new bootstrap.Tooltip(tooltipTriggerEl);
+	});
 </script>
