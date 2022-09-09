@@ -1,15 +1,19 @@
 <p style="color: green"><%= notice %></p>
-<main class="container mb-4">
-  
-  <div class="row mb-2 mt-4">
-    <%= render :partial => '/noticias/layoutsBlog/principaisBlogs' %>
+<main class="container">
+  <%= render_if @principais[0].present?, '/noticias/layoutsBlog/principalBlog', noticia: @principais[0] %>
+  <div class="row mb-2">
+    <%= render_if @principais[1].present?, '/noticias/layoutsBlog/principaisBlogs', noticia: @principais[1] %>
+    <%= render_if @principais[2].present?, '/noticias/layoutsBlog/principaisBlogs', noticia: @principais[2] %>
   </div>
 
   <div class="row g-5">
     <div class="col-md-8">
-      <!--<h3 class="pb-4 mb-4 fst-italic border-bottom">
-        <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-success  rounded-pill" %>
-      </h3>-->
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        Notícias
+      </h3>
+      <p>
+        <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-primary  rounded-pill" %>
+      </p>
 
       <% @noticias.each do |noticia| %>
         <div class="col-md-12">
@@ -17,14 +21,18 @@
               <div class="col p-4 d-flex flex-column position-static">
                   <!--<strong class="d-inline-block mb-2 text-success">Design</strong>-->
                   <h3 class="mb-0"><%= noticia.titulo %></h3>
-                  <div class="mb-1 text-muted"><%= noticia.created_at.strftime("%d de %B de %Y") %></div>
-                  <p class="mb-auto"><%= noticia.content.to_plain_text.truncate(180) %></p>
+                  <div class="mb-1 text-muted"><%= month_day_comma_year(noticia.created_at) %></div>
+                  <p class="card-text mb-auto"><%= noticia.content.to_plain_text.truncate(150) %></p>
                   <p class="mb-1">
-                    <%= link_to "Continue lendo", noticia, class:"btn btn-outline-primary rounded-pill" %>
+                    <%= link_to "Continue lendo ...", noticia, class:"btn btn-link" %>
                   </p>
+                  <div>
+                    <%= link_to "Editar", edit_noticia_path(noticia), class:"btn btn-outline-secondary rounded-pill mb-3" %>
+                    <%= button_to "Apagar", @noticia, method: :delete, class:"btn btn-outline-danger rounded-pill mb-3" %>
+                  </div>
               </div>
               <div class="col-auto d-none d-lg-block">
-                  <%= image_tag (noticia.arquivo_url), :class => "bd-placeholder-img", :width => "200", :height => "250" %>
+                  <%= image_tag noticia.arquivo_url, :class => "bd-placeholder-img", :width => "250", :height => "280" if noticia.arquivo.present?  %>
               </div>
             </div>
         </div>
@@ -32,8 +40,8 @@
       <% end %>
 
       <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary rounded-pill" href="#">Anterior</a>
-        <a class="btn btn-outline-secondary rounded-pill disabled">Próximo</a>
+        <%= link_to_next_page @noticias, 'Anterior', class: "btn btn-outline-primary rounded-pill" %>
+        <%= link_to_previous_page @noticias, 'Próximo', class: "btn btn-outline-secondary rounded-pill" %>
       </nav>
 
     </div>

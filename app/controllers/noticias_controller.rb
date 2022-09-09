@@ -3,7 +3,14 @@ class NoticiasController < ApplicationController
 
   # GET /noticias or /noticias.json
   def index
-    @noticias = Noticia.all.with_rich_text_content
+    @principais = Noticia.order(created_at: :desc).first(3)
+    current_page = (params[:page] || 1).to_i
+    principal_ids = @principais.pluck(:id).join(',')
+    
+    @noticias = Noticia.order(created_at: :desc)
+                        .where("id NOT IN(#{principal_ids})")
+                        .page(current_page).per(4)
+                        .with_rich_text_content
   end
 
   # GET /noticias/1 or /noticias/1.json
