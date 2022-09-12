@@ -1,5 +1,7 @@
 /* stylelint-disable selector-list-comma-newline-after */
-
+body {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/!important;
+}
 .blog-header {
     border-bottom: 1px solid #e5e5e5;
   }
