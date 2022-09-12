@@ -69,4 +69,6 @@ body {
   .blog-footer p:last-child {
     margin-bottom: 0;
   }
-  
+  img {
+    object-fit: cover;
+}

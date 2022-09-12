@@ -1,5 +1,15 @@
-<p style="color: green"><%= notice %></p>
 <main class="container">
+  <% if notice.present? %>
+      <div class="alert alert-success" role="alert">
+          <%= notice %>
+      </div>
+  <% end %>
+
+  <% if alert.present? %>
+      <div class="alert alert-danger" role="alert">
+          <%= alert %>
+      </div>
+  <% end %>
   <%= render_if @principais[0].present?, '/noticias/layoutsBlog/principalBlog', noticia: @principais[0] %>
   <div class="row mb-2">
     <%= render_if @principais[1].present?, '/noticias/layoutsBlog/principaisBlogs', noticia: @principais[1] %>
@@ -28,7 +38,7 @@
                   </p>
                   <div>
                     <%= link_to "Editar", edit_noticia_path(noticia), class:"btn btn-outline-secondary rounded-pill mb-3" %>
-                    <%= button_to "Apagar", @noticia, method: :delete, class:"btn btn-outline-danger rounded-pill mb-3" %>
+                    <%= link_to "Apagar", @noticia, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger rounded-pill mb-3" %>
                   </div>
               </div>
               <div class="col-auto d-none d-lg-block">

@@ -3,13 +3,13 @@ class NoticiasController < ApplicationController
 
   # GET /noticias or /noticias.json
   def index
-    @principais = Noticia.order(created_at: :desc).first(3)
+    @principais = Noticia.desc_order.first(3)
     current_page = (params[:page] || 1).to_i
     principal_ids = @principais.pluck(:id).join(',')
     
-    @noticias = Noticia.order(created_at: :desc)
-                        .where("id NOT IN(#{principal_ids})")
-                        .page(current_page).per(4)
+    @noticias = Noticia.without_principais(principal_ids)
+                        .desc_order
+                        .page(current_page)
                         .with_rich_text_content
   end
 
@@ -59,7 +59,7 @@ class NoticiasController < ApplicationController
     @noticia.destroy
 
     respond_to do |format|
-      format.html { redirect_to noticias_url, notice: "Noticia apagada com sucesso." }
+      format.html { redirect_to noticias_url, alert: "Noticia apagada com sucesso." }
       format.json { head :no_content }
     end
   end

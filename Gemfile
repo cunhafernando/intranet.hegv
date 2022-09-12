@@ -78,3 +78,4 @@ group :test do
 end
 
 gem "kaminari", "~> 1.2"
+gem 'simple_form', '~> 5.1'

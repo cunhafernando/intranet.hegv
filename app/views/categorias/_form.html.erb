@@ -1,0 +1,24 @@
+<%= form_with(model: categoria) do |form| %>
+  <% if categoria.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h3><%= pluralize(categoria.errors.count, "erro") %> proibiu que esta categoria fosse criada:</h3>
+
+      <ul>
+        <% categoria.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <div class="col-12 mb-3">
+      <%= form.label :name, style: "display: block", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.submit class: 'btn btn-outline-success rounded-pill' %>
+    </div>
+  </div>
+<% end %>
+

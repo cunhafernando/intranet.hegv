@@ -1,7 +1,7 @@
 <%= form_with(model: noticia) do |form| %>
   <% if noticia.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(noticia.errors.count, "error") %> proibiu que esta noticia fosse salva:</h2>
+    <div class="alert alert-danger" role="alert">
+      <h3><%= pluralize(noticia.errors.count, "erro") %> proibiu que esta noticia fosse salva:</h3>
 
       <ul>
         <% noticia.errors.each do |error| %>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-12">
-      <%= form.submit class: 'btn btn-outline-success rounded-pill'  %>
+      <%= form.submit class: 'btn btn-outline-success rounded-pill' %>
     </div>
   </div>
 <% end %>
