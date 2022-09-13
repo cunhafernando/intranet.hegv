@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :categorias
   
   get 'home/index'
   root to: "noticias#index" 
 
   resources :noticias
+  resources :categorias, except: [:show]
   resources :jornais
   
 end

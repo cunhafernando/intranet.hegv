@@ -21,7 +21,7 @@
         <%= link_to 'Nova Categoria', new_categoria_path, class: "btn btn-outline-primary  rounded-pill" %>
       </p>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
               <table class="table table-striped table-hover table-bordered">
                 <thead>
                   <tr>
@@ -34,7 +34,6 @@
                     <tr>
                       <td><%= categoria.name %></td>
                       <td>
-                        <%= link_to "Mostrar", categoria, class:"btn btn-outline-success rounded-pill mb-3" %>
                         <%= link_to "Editar", edit_categoria_path(categoria), class:"btn btn-outline-secondary rounded-pill mb-3" %>
                         <%= link_to "Apagar", categoria, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger rounded-pill mb-3" %>
                       </td>

@@ -72,3 +72,11 @@ body {
   img {
     object-fit: cover;
 }
+
+.form-inputs, .form-actions, .form-control {
+  margin-bottom: 20px;
+}
+
+trix-editor {
+  min-height: 15em;
+}

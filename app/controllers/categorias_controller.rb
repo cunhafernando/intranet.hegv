@@ -1,14 +1,12 @@
 class CategoriasController < ApplicationController
-  before_action :set_categoria, only: %i[ show edit update destroy ]
+  before_action :set_categoria, only: %i[ edit update destroy ]
 
   # GET /categorias or /categorias.json
   def index
-    @categorias = Categoria.all
+    @categorias = Categoria.sorted
   end
 
-  # GET /categorias/1 or /categorias/1.json
-  def show
-  end
+  
 
   # GET /categorias/new
   def new
@@ -49,11 +47,14 @@ class CategoriasController < ApplicationController
 
   # DELETE /categorias/1 or /categorias/1.json
   def destroy
-    @categoria.destroy
+    if @categoria.destroy
 
     respond_to do |format|
-      format.html { redirect_to categorias_url, alert: "Categoria removida com sucesso." }
+      format.html { redirect_to categorias_url, notice: "Categoria removida com sucesso." }
       format.json { head :no_content }
+    end
+    else
+      redirect_to categorias_url, alert: @categoria.errors.messages[:base][0]
     end
   end
 

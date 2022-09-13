@@ -72,6 +72,6 @@ class NoticiasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def noticia_params
-      params.require(:noticia).permit(:titulo, :texto, :content, :arquivo)
+      params.require(:noticia).permit(:titulo, :texto, :content, :arquivo, :categoria_id)
     end
 end
