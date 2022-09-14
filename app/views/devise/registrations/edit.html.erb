@@ -1,0 +1,52 @@
+
+<div class="modal modal-signin position-static d-block bg-white" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <!-- <h5 class="modal-title">Modal title</h5> -->
+        <h2 class="fw-bold mb-0">Editar <%= resource_name.to_s.humanize %></h2>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form class="">
+          <div class="form-floating mb-3">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= f.error_notification %>
+
+              <div class="form-inputs">
+                <%= f.input :first_name, required: true, autofocus: true %>
+                <%= f.input :last_name, required: true, autofocus: true %>
+                <%= f.input :email, required: true, autofocus: true %>
+
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <p>Atualmente aguardando confirmação para: <%= resource.unconfirmed_email %></p>
+                <% end %>
+
+                <%= f.input :password,
+                            hint: "deixe em branco se não quiser alterá-lo",
+                            required: false,
+                            input_html: { autocomplete: "nova senha" } %>
+                <%= f.input :password_confirmation,
+                            required: false,
+                            input_html: { autocomplete: "nova senha" } %>
+                <%= f.input :current_password,
+                            hint: "precisamos de sua senha atual para confirmar suas alterações",
+                            required: true,
+                            input_html: { autocomplete: "senha atual" } %>
+              </div>
+
+              <div class="form-actions">
+                <%= f.button :submit, "Atualizar", class:"w-100 mb-2 btn btn-lg rounded-3 btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+          <small class="text-muted">Solicite edição de sua conta</small>
+          <hr class="my-4">
+          <h2 class="fs-5 fw-bold mb-3">Ou cancelar sua conta</h2>
+          <p>Infeliz? <%= link_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger rounded-3" %></p>
+          <p><%= link_to "Voltar", :back, class:"btn btn-outline-secondary rounded-3" %></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 class Noticia < ApplicationRecord
 
     belongs_to :categoria
+    belongs_to :user
 
     validates :titulo, presence: true, length: { minimum: 5}
     validates :content, presence: true, length: { minimum: 10}

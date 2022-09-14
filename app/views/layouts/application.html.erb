@@ -15,7 +15,22 @@
 
   <body>
       <%= render '/layouts/header' %>
-      <%= yield %>
+      <main class="container">
+        <div class="row mb-2 mt-4">
+          <% if notice.present? %>
+              <div class="alert alert-success" role="alert">
+                  <%= notice %>
+              </div>
+          <% end %>
+
+          <% if alert.present? %>
+              <div class="alert alert-danger" role="alert">
+                  <%= alert %>
+              </div>
+          <% end %>
+        </div>
+        <%= yield %>
+      </main>
       <%= render '/layouts/footer' %>
   </body>
 </html>

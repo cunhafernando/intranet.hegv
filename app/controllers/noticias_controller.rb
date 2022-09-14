@@ -1,4 +1,5 @@
 class NoticiasController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_noticia, only: %i[ show edit update destroy ]
 
   # GET /noticias or /noticias.json
@@ -19,7 +20,7 @@ class NoticiasController < ApplicationController
 
   # GET /noticias/new
   def new
-    @noticia = Noticia.new
+    @noticia = current_user.noticias.new
   end
 
   # GET /noticias/1/edit
@@ -28,7 +29,7 @@ class NoticiasController < ApplicationController
 
   # POST /noticias or /noticias.json
   def create
-    @noticia = Noticia.new(noticia_params)
+    @noticia = current_user.noticias.new(noticia_params)
 
     respond_to do |format|
       if @noticia.save

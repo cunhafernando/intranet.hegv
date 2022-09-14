@@ -1,4 +1,5 @@
 class JornaisController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_jornal, only: %i[ show edit update destroy ]
 
   # GET /jornais or /jornais.json
@@ -12,7 +13,7 @@ class JornaisController < ApplicationController
 
   # GET /jornais/new
   def new
-    @jornal = Jornal.new
+    @jornal = current_user.jornais.new
   end
 
   # GET /jornais/1/edit
@@ -21,7 +22,7 @@ class JornaisController < ApplicationController
 
   # POST /jornais or /jornais.json
   def create
-    @jornal = Jornal.new(jornal_params)
+    @jornal = current_user.jornais.new(jornal_params)
 
     respond_to do |format|
       if @jornal.save

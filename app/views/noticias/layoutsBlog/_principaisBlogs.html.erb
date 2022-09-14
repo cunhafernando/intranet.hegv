@@ -3,7 +3,7 @@
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
         <strong class="d-inline-block mb-2 text-primary"><%= noticia.categoria.name %></strong>
-        <h3 class="mb-0"><%= noticia.titulo %></h3>
+        <h5 class="mb-0"><%= noticia.titulo %></h5>
         <div class="mb-1 text-muted"><%= month_day_comma_year(noticia.created_at) %></div>
         <p class="card-text mb-auto"><%= noticia.content.to_plain_text.truncate(100) %></p>
         <%= link_to "Continue lendo ...", noticia, class:"stretched-link" %>

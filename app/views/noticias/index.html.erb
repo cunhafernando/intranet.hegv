@@ -1,15 +1,5 @@
-<main class="container">
-  <% if notice.present? %>
-      <div class="alert alert-success" role="alert">
-          <%= notice %>
-      </div>
-  <% end %>
 
-  <% if alert.present? %>
-      <div class="alert alert-danger" role="alert">
-          <%= alert %>
-      </div>
-  <% end %>
+  
   <%= render_if @principais[0].present?, '/noticias/layoutsBlog/principalBlog', noticia: @principais[0] %>
   <div class="row mb-2">
     <%= render_if @principais[1].present?, '/noticias/layoutsBlog/principaisBlogs', noticia: @principais[1] %>
@@ -22,7 +12,9 @@
         Notícias
       </h3>
       <p>
-        <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-primary  rounded-pill" %>
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-primary  rounded-pill" %>
+        <% end %>
       </p>
 
       <% @noticias.each do |noticia| %>
@@ -58,4 +50,3 @@
     <%= render :partial => '/noticias/layoutsBlog/sideBlog' %>
   </div>
 
-</main>

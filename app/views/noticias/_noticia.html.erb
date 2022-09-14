@@ -1,7 +1,7 @@
 <div id="<%= dom_id noticia %>">
   <article class="blog-post">
     <h2 class="blog-post-title mb-1"><%= noticia.titulo %></h2>
-    <p class="mb-1 text-muted"><%= month_day_comma_year(noticia.created_at) %></p>
+    <p class="mb-2 text-muted"><%= month_day_comma_year(noticia.created_at) %>, <%= @noticia.user.email %></p>
     <figure class="figure float-end mb-0">
       <%= image_tag (noticia.arquivo_url), :class => "figure-img img-fluid rounded mb-0", :width => "400" %>
     </figure>
