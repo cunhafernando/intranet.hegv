@@ -4,7 +4,8 @@ class JornaisController < ApplicationController
 
   # GET /jornais or /jornais.json
   def index
-    @jornais = Jornal.all
+    current_page = (params[:page] || 1).to_i
+    @jornais = Jornal.order(created_at: :desc).page(current_page).per(4)
   end
 
   # GET /jornais/1 or /jornais/1.json

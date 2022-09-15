@@ -2,7 +2,9 @@
   <div class="row g-5">
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
-        <%= link_to 'Novo Jornal', new_jornal_path, class: "btn btn-outline-success  rounded-pill" %>
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Novo Jornal', new_jornal_path, class: "btn btn-outline-success  rounded-pill" %>
+        <% end %>
       </h3>
 
       
@@ -23,8 +25,8 @@
       <% end %> 
       </div>
       <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary rounded-pill" href="#">Anterior</a>
-        <a class="btn btn-outline-secondary rounded-pill disabled">Próximo</a>
+        <%= link_to_next_page @jornais, 'Anterior', class:"btn btn-outline-primary rounded-pill" %>
+        <%= link_to_previous_page @jornais, 'Recente', class:"btn btn-outline-primary rounded-pill" %>
       </nav>
 
     </div>
