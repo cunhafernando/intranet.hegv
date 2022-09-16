@@ -6,7 +6,7 @@
         Categorias
       </h3>
       <p>
-        <%= link_to 'Nova Categoria', new_categoria_path, class: "btn btn-outline-primary  rounded-pill" %>
+        <%= link_to 'Nova Categoria', new_categoria_path, class: "btn btn-outline-primary  rounded-pill" if policy(:categoria).new? %>
       </p>
 
         <div class="col-md-6">
@@ -22,8 +22,8 @@
                     <tr>
                       <td><%= categoria.name %></td>
                       <td>
-                        <%= link_to "Editar", edit_categoria_path(categoria), class:"btn btn-outline-secondary rounded-pill mb-3" %>
-                        <%= link_to "Apagar", categoria, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger rounded-pill mb-3" %>
+                        <%= link_to "Editar", edit_categoria_path(categoria), class:"btn btn-outline-secondary rounded-pill mb-3" if policy(categoria).edit? %>
+                        <%= link_to "Apagar", categoria, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger rounded-pill mb-3" if policy(categoria).destroy? %>
                       </td>
                     </tr>
                   <% end %>

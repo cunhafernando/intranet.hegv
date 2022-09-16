@@ -1,11 +1,11 @@
 class JornaisController < ApplicationController
+  include Paginable
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_jornal, only: %i[ show edit update destroy ]
 
   # GET /jornais or /jornais.json
   def index
-    current_page = (params[:page] || 1).to_i
-    @jornais = Jornal.order(created_at: :desc).page(current_page).per(4)
+    @jornais = Jornal.order(created_at: :desc).page(current_page).per(8)
   end
 
   # GET /jornais/1 or /jornais/1.json
@@ -63,6 +63,7 @@ class JornaisController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_jornal
       @jornal = Jornal.find(params[:id])
+      authorize @jornal
     end
 
     # Only allow a list of trusted parameters through.

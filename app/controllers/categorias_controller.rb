@@ -1,9 +1,11 @@
 class CategoriasController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_categoria, only: %i[ edit update destroy ]
+  
 
   # GET /categorias or /categorias.json
   def index
-    @categorias = Categoria.sorted
+    @categorias = policy_scope(Categoria.sorted)
   end
 
   
@@ -11,6 +13,7 @@ class CategoriasController < ApplicationController
   # GET /categorias/new
   def new
     @categoria = Categoria.new
+    authorize @categoria
   end
 
   # GET /categorias/1/edit
@@ -20,6 +23,7 @@ class CategoriasController < ApplicationController
   # POST /categorias or /categorias.json
   def create
     @categoria = Categoria.new(categoria_params)
+    authorize @categoria
 
     respond_to do |format|
       if @categoria.save
@@ -62,6 +66,7 @@ class CategoriasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_categoria
       @categoria = Categoria.find(params[:id])
+      authorize @categoria
     end
 
     # Only allow a list of trusted parameters through.

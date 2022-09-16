@@ -1,15 +1,21 @@
 
 <div class="col-md-6">
-    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-    <div class="col p-4 d-flex flex-column position-static">
-        <strong class="d-inline-block mb-2 text-primary"><%= noticia.categoria.name %></strong>
-        <h5 class="mb-0"><%= noticia.titulo %></h5>
-        <div class="mb-1 text-muted"><%= month_day_comma_year(noticia.created_at) %></div>
-        <p class="card-text mb-auto"><%= noticia.content.to_plain_text.truncate(100) %></p>
-        <%= link_to "Continue lendo ...", noticia, class:"stretched-link" %>
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-300 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary h6"><%= render '/noticias/layoutsBlog/noticia_categoria', noticia: noticia %></strong>
+            <h5 class="mb-0"><%= noticia.titulo %></h5>
+            <div class="mb-1 text-muted"><small><%= render '/noticias/layoutsBlog/noticia_data', noticia: noticia %></small></div>
+            <p class="card-text mb-auto"><small><%= noticia.content.to_plain_text.truncate(100) %></small></p>
+            <p class="mb-1"><small><%= link_to "Continue lendo ...", noticia, class:"stretched-link" %></small></p>
+            <div>
+        <!--<%= link_to "Editar", edit_noticia_path(noticia), class:"btn btn-outline-primary mb-3" if policy(noticia).update? %>
+        <%= link_to "Apagar", @noticia, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger mb-3" if policy(noticia).destroy? %>-->
     </div>
-    <div class="col-auto d-none d-lg-block">
-        <%= image_tag noticia.arquivo_url, :class => "bd-placeholder-img", :width => "200", :height => "250" if noticia.arquivo.present?  %>
-    </div>
+        </div>
+        
+        <div class="col-auto d-none d-lg-block">
+            <%= image_tag noticia.arquivo_url, :class => "bd-placeholder-img", :width => "200", :height => "320" if noticia.arquivo.present?  %>
+        </div>
+        
     </div>
 </div>

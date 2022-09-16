@@ -1,17 +1,25 @@
 class NoticiasController < ApplicationController
+  include Paginable
+
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_noticia, only: %i[ show edit update destroy ]
 
   # GET /noticias or /noticias.json
   def index
-    @principais = Noticia.desc_order.first(3)
-    current_page = (params[:page] || 1).to_i
+    categoria = Categoria.find_by_name(params[:categoria]) if params[:categoria].present?
+    @principais = Noticia.filtro_por_categoria(categoria)
+                         .desc_order.first(3)
+    
     principal_ids = @principais.pluck(:id).join(',')
+
+    
     
     @noticias = Noticia.without_principais(principal_ids)
-                        .desc_order
-                        .page(current_page)
-                        .with_rich_text_content
+                       .filtro_por_categoria(categoria)
+                       .desc_order
+                       .page(current_page)
+                       .with_rich_text_content
+    @categorias = Categoria.sorted
   end
 
   # GET /noticias/1 or /noticias/1.json
@@ -69,6 +77,7 @@ class NoticiasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_noticia
       @noticia = Noticia.find(params[:id])
+      authorize @noticia
     end
 
     # Only allow a list of trusted parameters through.

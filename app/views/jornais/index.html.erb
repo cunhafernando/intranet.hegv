@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         <% if current_user && current_user.admin? %>
-          <%= link_to 'Novo Jornal', new_jornal_path, class: "btn btn-outline-success  rounded-pill" %>
+          <%= link_to 'Novo Jornal', new_jornal_path, class: "btn btn-outline-success mb-3" if user_signed_in? %>
         <% end %>
       </h3>
 
@@ -16,7 +16,7 @@
               <h5 class="card-title"><%= jornal.titulo %></h5>
               <div class="mb-2 text-muted"><%== jornal.created_at.strftime("%d de %B de %Y") %></div>
               <p class="mb-1">
-                <%= link_to "Mostrar", jornal, class:"btn btn-outline-primary rounded-pill" %>
+                <%= link_to "Abra o jornal...", jornal, class:"btn btn-link" %>
               </p>
             </div>
           </div>
@@ -25,8 +25,8 @@
       <% end %> 
       </div>
       <nav class="blog-pagination" aria-label="Pagination">
-        <%= link_to_next_page @jornais, 'Anterior', class:"btn btn-outline-primary rounded-pill" %>
-        <%= link_to_previous_page @jornais, 'Recente', class:"btn btn-outline-primary rounded-pill" %>
+        <%= link_to_next_page @jornais, 'Anterior', class:"btn btn-outline-primary mb-3" %>
+        <%= link_to_previous_page @jornais, 'Recente', class:"btn btn-outline-secondary mb-3" %>
       </nav>
 
     </div>

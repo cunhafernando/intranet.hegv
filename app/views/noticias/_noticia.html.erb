@@ -1,7 +1,8 @@
 <div id="<%= dom_id noticia %>">
   <article class="blog-post">
-    <h2 class="blog-post-title mb-1"><%= noticia.titulo %></h2>
-    <p class="mb-2 text-muted"><%= month_day_comma_year(noticia.created_at) %>, <%= @noticia.user.email %></p>
+    <strong class="d-inline-block mb-2 text-primary h6"><%= render '/noticias/layoutsBlog/noticia_categoria', noticia: noticia %></strong>
+    <h2 class="blog-post-title mb-1 border-bottom"><%= noticia.titulo %></h2>
+    <p class="mb-2 text-muted"><%= render '/noticias/layoutsBlog/noticia_data', noticia: noticia %></p>
     <figure class="figure float-end mb-0">
       <%= image_tag (noticia.arquivo_url), :class => "figure-img img-fluid rounded mb-0", :width => "400" %>
     </figure>

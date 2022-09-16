@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   has_many :noticias, dependent: :destroy
   has_many :jornais, dependent: :destroy
   # Include default devise modules. Others available are:

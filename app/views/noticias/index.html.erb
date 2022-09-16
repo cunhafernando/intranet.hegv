@@ -13,28 +13,28 @@
       </h3>
       <p>
         <% if current_user && current_user.admin? %>
-          <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-primary  rounded-pill" %>
+          <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-success " if user_signed_in? %>
         <% end %>
       </p>
 
       <% @noticias.each do |noticia| %>
         <div class="col-md-12">
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-300 position-relative">
               <div class="col p-4 d-flex flex-column position-static">
-                  <!--<strong class="d-inline-block mb-2 text-success">Design</strong>-->
-                  <h3 class="mb-0"><%= noticia.titulo %></h3>
-                  <div class="mb-1 text-muted"><%= month_day_comma_year(noticia.created_at) %></div>
-                  <p class="card-text mb-auto"><%= noticia.content.to_plain_text.truncate(150) %></p>
-                  <p class="mb-1">
-                    <%= link_to "Continue lendo ...", noticia, class:"btn btn-link" %>
+                  <strong class="d-inline-block mb-2 text-primary h6"><%= render '/noticias/layoutsBlog/noticia_categoria', noticia: noticia %></strong>
+                  <h4 class="mb-0"><%= noticia.titulo %></h4>
+                  <div class="mb-1 text-muted"><small><%= render '/noticias/layoutsBlog/noticia_data', noticia: noticia %></small></div>
+                  <p class="card-text mb-auto"><small><%= noticia.content.to_plain_text.truncate(150) %></small></p>
+                  <p class="mb-4">
+                    <small><%= link_to "Continue lendo ...", noticia, class:"stretched-link" %></small>
                   </p>
                   <div>
-                    <%= link_to "Editar", edit_noticia_path(noticia), class:"btn btn-outline-secondary rounded-pill mb-3" %>
-                    <%= link_to "Apagar", @noticia, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger rounded-pill mb-3" %>
+                    <!--<%= link_to "Editar", edit_noticia_path(noticia), class:"btn btn-outline-primary mb-3" if policy(noticia).update? %>
+                    <%= link_to "Apagar", @noticia, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-outline-danger mb-3" if policy(noticia).destroy? %>-->
                   </div>
               </div>
               <div class="col-auto d-none d-lg-block">
-                  <%= image_tag noticia.arquivo_url, :class => "bd-placeholder-img", :width => "250", :height => "280" if noticia.arquivo.present?  %>
+                  <%= image_tag noticia.arquivo_url, :class => "bd-placeholder-img", :width => "250", :height => "320" if noticia.arquivo.present?  %>
               </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
       <% end %>
 
       <nav class="blog-pagination" aria-label="Pagination">
-        <%= link_to_next_page @noticias, 'Anterior', class: "btn btn-outline-primary rounded-pill" %>
-        <%= link_to_previous_page @noticias, 'Próximo', class: "btn btn-outline-secondary rounded-pill" %>
+        <%= link_to_next_page @noticias, 'Anterior', class: "btn btn-outline-primary mb-3" %>
+        <%= link_to_previous_page @noticias, 'Próximo', class: "btn btn-outline-secondary mb-3" %>
       </nav>
 
     </div>

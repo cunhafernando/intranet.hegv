@@ -1,24 +1,24 @@
  
   <div class="row g-5">
     <div class="col-md-8">
-      <h3 class="pb-4 mb-4 fst-italic border-bottom">
-        Notícia
+      <h3 class="pb-4 mb-4 fst-italic">
+        
       </h3>
 
       <%= render @noticia %>
       <% if current_user && current_user.admin? %>
         <div class="mb-4">
-          <%= link_to "Editar", edit_noticia_path(@noticia), class:"btn btn-outline-secondary rounded-pill mb-3" %>
-          <%= link_to "Voltar", noticias_path, class:"btn btn-outline-primary rounded-pill mb-3" %>
+          <%= link_to "Editar", edit_noticia_path(@noticia), class:"btn btn-outline-primary mb-3" if policy(@noticia).update? %>
+          <%= link_to "Voltar", noticias_path, class:"btn btn-outline-success mb-3" %>
         </div>
         <div class="mb-4">
-          <%= button_to "Apagar", @noticia, method: :delete, class:"btn btn-outline-danger rounded-pill mb-3" %>
+          <%= button_to "Apagar", @noticia, method: :delete, class:"btn btn-outline-danger mb-3" if policy(@noticia).destroy? %>
         </div>
       <% end %>
 
       <!--<nav class="blog-pagination" aria-label="Pagination">
         <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
-        <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
+        <a class="btn btn-outline-secondary disabled">Newer</a>
       </nav>-->
 
     </div>

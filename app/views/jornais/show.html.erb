@@ -7,13 +7,17 @@
       <%= render @jornal %>
 
       <div class="mb-4">
-        <%= link_to "Voltar", jornais_path, class:"btn btn-outline-info rounded-pill" %>
+        <%= link_to "Editar", edit_jornal_path(@jornal), class:"btn btn-outline-primary mb-3" if policy(@jornal).update? %>
+        <%= link_to "Voltar", jornais_path, class:"btn btn-outline-success mb-3" %>
+      </div>
+      <div class="mb-4">
+        <%= button_to "Apagar", @jornal, method: :delete, class:"btn btn-outline-danger mb-3" if policy(@jornal).destroy? %>
       </div>
       
 
       <!--<nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
-        <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
+        <a class="btn btn-outline-primary" href="#">Older</a>
+        <a class="btn btn-outline-secondary disabled">Newer</a>
       </nav>-->
 
     </div>
