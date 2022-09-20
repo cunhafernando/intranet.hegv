@@ -12,6 +12,12 @@ class Noticia < ApplicationRecord
     paginates_per 6
 
     scope :desc_order, -> { order(created_at: :desc)}
-    scope :without_principais, -> (ids) { where("id NOT IN(#{ids})") if ids.present?}
-    scope :filtro_por_categoria, -> (categoria) {where categoria_id: categoria.id if categoria.present?}
+    scope :without_principais, -> (ids) { where("id NOT IN(#{ids})") if ids.present? }
+    scope :filtro_por_categoria, -> (categoria) { where categoria_id: categoria.id if categoria.present? }
+    scope :filtro_por_archive, lambda { |month_year|
+        if month_year
+            date = Date.strptime(month_year, '%B %Y')
+            where created_at: date.beginning_of_month..date.end_of_month.next_day
+        end
+    }
 end

@@ -1,9 +1,8 @@
 <div class="p-4">
     <h4 class="fst-italic">Categorias</h4>
     <ol class="list-unstyled ">
-    <% @categorias.each do |categoria| %>
-        <li><%= link_to categoria.name, root_path(categoria: categoria.name), 
-        class:"text-decoration-none #{'text-success' if categoria.name.to_s == params[:categoria]}" %></li>
+    <% Categoria.all.each do |categoria| %>
+        <li><%= link_to categoria.name, noticias_path(categoria: categoria.name), class:"text-decoration-none #{'text-success' if categoria.name.to_s == params[:categoria]}" %></li>
     <% end %>
     </ol>
 </div>

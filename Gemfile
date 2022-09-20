@@ -26,6 +26,7 @@ end
 group :development do
   gem "web-console"
   gem "letter_opener", "~> 1.8"
+  gem 'bullet', '~> 7.0', '>= 7.0.3'
 end
 
 group :test do
@@ -40,3 +41,4 @@ gem "devise", "~> 4.8"
 
 gem "pundit", "~> 2.2"
 gem 'rolify', '~> 6.0'
+gem "groupdate", "~> 6.1"

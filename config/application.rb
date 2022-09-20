@@ -20,7 +20,7 @@ module Intranet
     # in config/environments, which are processed later.
     #
     config.time_zone = "Brasilia"
-    config.active_record.default_timezone = :local
+    #config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   end

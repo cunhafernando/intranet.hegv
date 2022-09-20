@@ -6,24 +6,36 @@ class NoticiasController < ApplicationController
 
   # GET /noticias or /noticias.json
   def index
-    categoria = Categoria.find_by_name(params[:categoria]) if params[:categoria].present?
-    @principais = Noticia.filtro_por_categoria(categoria)
-                         .desc_order.first(3)
+    @categorias = Categoria.sorted
+    categoria = @categorias.select { |c| c.name == params[:categoria] }[0] if params[:categoria].present?
+    @principais = Noticia.includes(:categoria, :user, :rich_text_content)
+                         .filtro_por_categoria(categoria)
+                         .filtro_por_archive(params[:month_year])
+                         .desc_order
+                         .first(3)
+                         
+                         
     
     principal_ids = @principais.pluck(:id).join(',')
 
     
     
-    @noticias = Noticia.without_principais(principal_ids)
+    @noticias = Noticia.includes(:categoria, :user, :rich_text_content)
+                       .without_principais(principal_ids)
                        .filtro_por_categoria(categoria)
+                       .filtro_por_archive(params[:month_year])
                        .desc_order
-                       .page(current_page)
                        .with_rich_text_content
-    @categorias = Categoria.sorted
+                       .page(current_page)
+                       
+    @archives = Noticia.group_by_month(:created_at, format: '%B %Y').count           
+                       
+    
   end
 
   # GET /noticias/1 or /noticias/1.json
   def show
+    authorize @noticia
   end
 
   # GET /noticias/new
