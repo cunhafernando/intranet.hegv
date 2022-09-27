@@ -19,8 +19,8 @@ module Intranet
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = "Brasilia"
-    #config.active_record.default_timezone = :local
+    config.time_zone = "America/Sao_Paulo"
+    # config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   end

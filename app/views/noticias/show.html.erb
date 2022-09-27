@@ -1,6 +1,6 @@
  
-  <div class="row g-5">
-    <div class="col-md-8">
+  <div class="row g-5 mb-5">
+    <div class="col-md-12">
       <h3 class="pb-4 mb-4 fst-italic">
         
       </h3>
@@ -16,13 +16,25 @@
         </div>
       <% end %>
 
+
+      <h2 class="mt-3">Comentários</h2>
+      <%= render @noticia.comentarios %>
+
+
+      <h2>Adicione um comentário:</h2>
+      <% if policy(:comentario).create? %>
+        <%= render 'comentarios/form' %>
+      <% else %>
+        Por favor, faça login para criar um comentário.
+      <% end %>
+
+
       <!--<nav class="blog-pagination" aria-label="Pagination">
         <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
         <a class="btn btn-outline-secondary disabled">Newer</a>
       </nav>-->
 
     </div>
-    <%= render :partial => '/noticias/layoutsBlog/sideBlog' %>
   </div>
 
 

@@ -1,0 +1,7 @@
+<div class="card mb-3">
+    <div class="card-body">
+    <h5 class="card-title"><%= month_day_comma_year(comentario.created_at) %></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Por: <%= comentario.user.first_name %> <%= comentario.user.email %></h6>
+    <p class="card-text"><%= comentario.body %></p>
+    <%= button_to "Apagar", noticia_comentario_path(@noticia, comentario), method: :delete, class:"btn btn-danger mb-3" if policy(@noticia).destroy? %>
+</div>

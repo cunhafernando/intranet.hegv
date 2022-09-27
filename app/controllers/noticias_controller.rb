@@ -2,15 +2,17 @@ class NoticiasController < ApplicationController
   include Paginable
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_noticia, only: %i[ show edit update destroy ]
+  before_action :set_noticia, only: %i[edit update destroy ]
+  before_action :set_categorias, only: %i[new create edit update]
 
   # GET /noticias or /noticias.json
   def index
+    @arquivos = Noticia.group_by_month(:created_at, format: '%B %Y', locale: :en).count  
     @categorias = Categoria.sorted
     categoria = @categorias.select { |c| c.name == params[:categoria] }[0] if params[:categoria].present?
     @principais = Noticia.includes(:categoria, :user, :rich_text_content)
                          .filtro_por_categoria(categoria)
-                         .filtro_por_archive(params[:month_year])
+                         .filtro_por_arquivo(params[:month_year])
                          .desc_order
                          .first(3)
                          
@@ -23,18 +25,19 @@ class NoticiasController < ApplicationController
     @noticias = Noticia.includes(:categoria, :user, :rich_text_content)
                        .without_principais(principal_ids)
                        .filtro_por_categoria(categoria)
-                       .filtro_por_archive(params[:month_year])
+                       .filtro_por_arquivo(params[:month_year])
                        .desc_order
                        .with_rich_text_content
                        .page(current_page)
                        
-    @archives = Noticia.group_by_month(:created_at, format: '%B %Y').count           
+             
                        
     
   end
 
   # GET /noticias/1 or /noticias/1.json
   def show
+    @noticia = Noticia.includes(comentarios: :user).find(params[:id])
     authorize @noticia
   end
 
@@ -86,14 +89,17 @@ class NoticiasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
+    def noticia_params
+      params.require(:noticia).permit(:titulo, :texto, :content, :arquivo, :categoria_id)
+    end
+
     def set_noticia
       @noticia = Noticia.find(params[:id])
       authorize @noticia
     end
 
-    # Only allow a list of trusted parameters through.
-    def noticia_params
-      params.require(:noticia).permit(:titulo, :texto, :content, :arquivo, :categoria_id)
+    def set_categorias
+      @categorias = Categoria.sorted
     end
 end

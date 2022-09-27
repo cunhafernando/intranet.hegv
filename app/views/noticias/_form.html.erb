@@ -15,7 +15,7 @@
     <div class="form-inputs">
       <%= f.input :titulo, label: "Título" %>
       <%= f.input :content, as: :rich_text_area, label: 'Texto', placeholder: 'Insira seu texto aqui' %>
-      <%= f.association :categoria, collection: Categoria.sorted, prompt: "Escolha uma categoria" %>
+      <%= f.association :categoria, collection: @categorias, prompt: "Escolha uma categoria" %>
       <%= f.file_field :arquivo, class:"form-control" %>
     </div>
 
