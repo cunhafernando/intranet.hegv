@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :useres
-  
-  root to: "noticias#index" 
+  scope '(:locale)', locale: /pt-BR|en/ do
+    devise_for :useres
+    
+    root to: "noticias#index" 
 
+  resources :ramais
   resources :noticias do
-    resources :comentarios, only: %i[create destroy]
+      resources :comentarios, only: %i[create destroy]
+    end
+    resources :categorias, except: [:show]
+    resources :jornais
   end
-  resources :categorias, except: [:show]
-  resources :jornais
+
+  post 'import_ramais' => "ramais#import_ramais"
   
 end

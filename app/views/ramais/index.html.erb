@@ -1,0 +1,40 @@
+<div class="row align-items-center mt-5">
+      <div class="col-3">
+        
+      </div>
+      <div class="col-6">
+        <h1>Nova Notícia</h1>
+      </div>
+      <div class="col-3">
+      
+      </div>
+  </div>
+
+  <%= link_to "New ramal", new_ramal_path, class:"btn btn-outline-primary" %>
+
+  <table id="table" data-toggle="table" data-search="true" data-show-columns="true">
+  <thead>
+    <tr class="tr-class-1 table-dark">
+      <th scope="col" data-field="setor" data-valign="middle"><strong>Setor</strong></th>
+      <th scope="col" data-field="telefone" data-valign="middle"><strong>Telefone</strong></th>
+      <th scope="col" data-field="email" data-valign="middle"><strong>Email</strong></th>
+      <th scope="col" data-field="departamento" data-valign="middle"><strong>Departamento</strong></th>
+      <th scope="col" data-field="acao" data-valign="middle"><strong>Ação</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ramais.each do |ramal| %>
+      <tr>
+        <th><%= ramal.setor %></th>
+        <th><%= ramal.telefone %></th>
+        <th><%= ramal.email %></th>
+        <th><%= ramal.departamento %></th>
+        <th ><%= link_to "", ramal, class: "bi bi-box-arrow-right" %></th>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  
+<%= link_to "New ramal", new_ramal_path %>
+

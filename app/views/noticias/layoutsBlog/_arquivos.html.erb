@@ -3,7 +3,7 @@
     <ol class="list-unstyled mb-0">
         <% @arquivos.each do |month_year, count| %>
             <li>
-                <%= link_to "#{month_year} (#{count})", noticias_path(month_year: month_year), class:"text-decoration-none #{'text-success' if month_year == params[:month_year]}" %>
+                <%= link_to "#{month_year.capitalize} (#{count})", noticias_path(month_year: month_year), class:"text-decoration-none #{'text-success' if month_year == params[:month_year]}" %>
             </li>
         <% end %>
     </ol>

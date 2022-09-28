@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @ramal %>
+
+<div>
+  <%= link_to "Edit this ramal", edit_ramal_path(@ramal) %> |
+  <%= link_to "Back to ramais", ramais_path %>
+
+  <%= button_to "Destroy this ramal", @ramal, method: :delete %>
+</div>

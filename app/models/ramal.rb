@@ -1,0 +1,2 @@
+class Ramal < ApplicationRecord
+end

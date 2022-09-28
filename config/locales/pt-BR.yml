@@ -3,8 +3,8 @@ pt-BR:
   activerecord:
     errors:
       messages:
-        record_invalid: 'A validação falhou: %{errors}'
         complexity: 'requisito de complexidade não atendido. Por favor, use: 1 maiúscula, 1 minúscula, 1 dígito e 1 caractere especial'
+        record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes

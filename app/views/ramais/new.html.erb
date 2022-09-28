@@ -1,0 +1,14 @@
+<h1>Novo ramal</h1>
+
+<%= form_tag import_ramais_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Importar", :class=> "btn"%>
+<% end %>
+
+<%= render "form", ramal: @ramal %>
+
+<br>
+
+<div>
+  <%= link_to "Back to ramais", ramais_path %>
+</div>
