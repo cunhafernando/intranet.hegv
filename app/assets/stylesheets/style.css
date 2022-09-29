@@ -105,3 +105,7 @@ trix-editor {
   cursor: inherit;
   display: block;
 }
+.bootstrap-table .fixed-table-container.fixed-height .fixed-table-border {
+  border-left: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
+}

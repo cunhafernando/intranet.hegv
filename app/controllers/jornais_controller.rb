@@ -27,7 +27,7 @@ class JornaisController < ApplicationController
 
     respond_to do |format|
       if @jornal.save
-        format.html { redirect_to jornal_url(@jornal), notice: "Jornal was successfully created." }
+        format.html { redirect_to jornal_url(@jornal), notice: "Jornal criado com sucesso" }
         format.json { render :show, status: :created, location: @jornal }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class JornaisController < ApplicationController
   def update
     respond_to do |format|
       if @jornal.update(jornal_params)
-        format.html { redirect_to jornal_url(@jornal), notice: "Jornal was successfully updated." }
+        format.html { redirect_to jornal_url(@jornal), notice: "Jornal atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @jornal }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class JornaisController < ApplicationController
     @jornal.destroy
 
     respond_to do |format|
-      format.html { redirect_to jornais_url, notice: "Jornal was successfully destroyed." }
+      format.html { redirect_to jornais_url, notice: "Jornal apagando com sucesso." }
       format.json { head :no_content }
     end
   end

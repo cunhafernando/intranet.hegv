@@ -4,7 +4,7 @@ class RamaisController < ApplicationController
 
   # GET /ramais or /ramais.json
   def index
-    @ramais = Ramal.all
+    @ramais = Ramal.order(setor: :asc)
   end
 
   # GET /ramais/1 or /ramais/1.json
@@ -38,7 +38,7 @@ class RamaisController < ApplicationController
 
   # GET /ramais/new
   def new
-    @ramal = Ramal.new
+    @ramal = current_user.ramais.new
   end
 
   # GET /ramais/1/edit
@@ -47,7 +47,7 @@ class RamaisController < ApplicationController
 
   # POST /ramais or /ramais.json
   def create
-    @ramal = Ramal.new(ramal_params)
+    @ramal = current_user.ramais.new(ramal_params)
 
     respond_to do |format|
       if @ramal.save
@@ -87,6 +87,7 @@ class RamaisController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_ramal
       @ramal = Ramal.find(params[:id])
+      authorize @ramal
     end
 
     # Only allow a list of trusted parameters through.

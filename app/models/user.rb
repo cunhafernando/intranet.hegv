@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :noticias, dependent: :destroy
   has_many :jornais, dependent: :destroy
   has_many :comentarios, dependent: :destroy
+  has_many :ramais, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise  :confirmable,
