@@ -1,14 +1,40 @@
-<h1>Novo ramal</h1>
 
-<%= form_tag import_ramais_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Importar", :class=> "btn"%>
-<% end %>
+  <div class="row align-items-center mt-3 mb-3">
+    <div class="col-3">
+        
+      </div>
+      <div class="col-6">
+        <h1 class="text-primary">Nova Lista de Ramais</h1>
+      </div>
+      <div class="col-3">
+      
+      </div>
+    <div class="row align-items-center mt-5 mb-5">
+      <div class="col-6">
+      <h3 class="text-primary">Apagar lista de Ramais</h3>
+      <p class="text-secondary"></p>
+        <%= link_to "Apagar Ramais", remove_all_ramais_path, :method => :get, class: "btn btn-danger mb-3" %>
+      </div>
+      <div class="col-6">
+        <h3 class="text-primary">Importar Ramais</h3>
+        <p class="text-secondary"></p>
+        <%= form_tag import_ramais_path, multipart: true do %>
+          <span class="btn btn-large btn-secondary btn-file mb-3">
+            Escolha uma arquivo
+            <%= file_field_tag :file %>
+          </span>
+          <%= submit_tag "Importar", :class=> "btn btn-primary mb-3 ms-3" %>
+        <% end %>
+      </div>
+    </div>
+  <div>
+
+
 
 <%= render "form", ramal: @ramal %>
 
 <br>
 
 <div>
-  <%= link_to "Back to ramais", ramais_path %>
+  <%= link_to " Voltar", ramais_path, class: "btn btn-primary bi bi-box-arrow-left mb-3"  %>
 </div>

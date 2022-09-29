@@ -1,25 +1,23 @@
 <div id="<%= dom_id ramal %>">
 
-
-
-  <p>
-    <strong>Setor:</strong>
-    <%= ramal.setor %>
-  </p>
-
-  <p>
-    <strong>Telefone:</strong>
-    <%= ramal.telefone %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= ramal.email %>
-  </p>
-
-  <p>
-    <strong>Departamento:</strong>
-    <%= ramal.departamento %>
-  </p>
+  <table class="table mb-5">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Setor:</th>
+        <th scope="col">Telefone:</th>
+        <th scope="col">Email:</th>
+        <th scope="col">Departamento:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= ramal.setor %></td>
+        <td><%= ramal.telefone %></td>
+        <td><%= ramal.email %></td>
+        <td><%= ramal.departamento %></td>
+      </tr>
+    </tbody>
+  </table>
+    
 
 </div>

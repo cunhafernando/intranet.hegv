@@ -1,40 +1,47 @@
-<div class="row align-items-center mt-5">
+<div class="row align-items-center mt-3">
       <div class="col-3">
         
       </div>
       <div class="col-6">
-        <h1>Nova Notícia</h1>
+        <h1 class="text-primary">Ramais</h1>
       </div>
       <div class="col-3">
       
       </div>
   </div>
 
-  <%= link_to "New ramal", new_ramal_path, class:"btn btn-outline-primary" %>
+  <%= link_to "Novo Ramal", new_ramal_path, class:"btn btn-outline-primary" %>
 
   <table id="table" data-toggle="table" data-search="true" data-show-columns="true">
   <thead>
-    <tr class="tr-class-1 table-dark">
+    <tr class="tr-class-1 table-primary">
       <th scope="col" data-field="setor" data-valign="middle"><strong>Setor</strong></th>
       <th scope="col" data-field="telefone" data-valign="middle"><strong>Telefone</strong></th>
       <th scope="col" data-field="email" data-valign="middle"><strong>Email</strong></th>
       <th scope="col" data-field="departamento" data-valign="middle"><strong>Departamento</strong></th>
-      <th scope="col" data-field="acao" data-valign="middle"><strong>Ação</strong></th>
+      <th scope="col" data-field="mostrar" data-valign="middle"><strong></strong></th>
+      <%  if user_signed_in? %>
+        <th scope="col" data-field="editar" data-valign="middle"><strong></strong></th>
+        <th scope="col" data-field="apagar" data-valign="middle"><strong></strong></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @ramais.each do |ramal| %>
       <tr>
         <th><%= ramal.setor %></th>
-        <th><%= ramal.telefone %></th>
+        <th class="col-1 text-center"><%= ramal.telefone %></th>
         <th><%= ramal.email %></th>
         <th><%= ramal.departamento %></th>
-        <th ><%= link_to "", ramal, class: "bi bi-box-arrow-right" %></th>
+        <th><%= link_to "", ramal, class: "btn btn-primary bi bi-box-arrow-right mb-3" %></th>
+        <%  if user_signed_in? %>
+          <th><%= link_to "", edit_ramal_path(ramal), class:"btn btn-secondary mb-3 bi bi-pencil-square" %></th>
+          <th><%= button_to "", ramal, method: :delete, class:"btn btn-danger mb-3 bi-trash3 mb-3" %></th>
+        <% end %>
         
       </tr>
     <% end %>
   </tbody>
 </table>
   
-<%= link_to "New ramal", new_ramal_path %>
 

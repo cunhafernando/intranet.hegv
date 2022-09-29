@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     
     root to: "noticias#index" 
 
-  resources :ramais
+  resources :ramais do
+    collection do
+      get 'remove_all'
+    end
+  end
   resources :noticias do
       resources :comentarios, only: %i[create destroy]
     end

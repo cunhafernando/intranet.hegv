@@ -1,4 +1,5 @@
 class RamaisController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_ramal, only: %i[ show edit update destroy ]
 
   # GET /ramais or /ramais.json
@@ -12,7 +13,7 @@ class RamaisController < ApplicationController
 
   def remove_all
     Ramal.delete_all
-    flash[:warn] = "Lista removida com sucesso"
+    flash[:notice] = "Lista removida com sucesso"
     redirect_to new_ramal_path
   end
 
@@ -50,7 +51,7 @@ class RamaisController < ApplicationController
 
     respond_to do |format|
       if @ramal.save
-        format.html { redirect_to ramal_url(@ramal), notice: "Ramal was successfully created." }
+        format.html { redirect_to ramal_url(@ramal), notice: "Ramal criado com sucesso." }
         format.json { render :show, status: :created, location: @ramal }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,7 +64,7 @@ class RamaisController < ApplicationController
   def update
     respond_to do |format|
       if @ramal.update(ramal_params)
-        format.html { redirect_to ramal_url(@ramal), notice: "Ramal was successfully updated." }
+        format.html { redirect_to ramal_url(@ramal), notice: "Ramal atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @ramal }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -77,7 +78,7 @@ class RamaisController < ApplicationController
     @ramal.destroy
 
     respond_to do |format|
-      format.html { redirect_to ramais_url, notice: "Ramal was successfully destroyed." }
+      format.html { redirect_to ramais_url, notice: "Ramal apagado com sucesso." }
       format.json { head :no_content }
     end
   end

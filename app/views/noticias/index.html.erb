@@ -13,7 +13,7 @@
       </h3>
       <p>
         <% if current_user && current_user.admin? %>
-          <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-success " if user_signed_in? %>
+          <%= link_to 'Nova Notícia', new_noticia_path, class: "btn btn-outline-success" if user_signed_in? %>
         <% end %>
       </p>
 

@@ -3,8 +3,7 @@
 <%= render @ramal %>
 
 <div>
-  <%= link_to "Edit this ramal", edit_ramal_path(@ramal) %> |
-  <%= link_to "Back to ramais", ramais_path %>
-
-  <%= button_to "Destroy this ramal", @ramal, method: :delete %>
+  <%= link_to "Editar", edit_ramal_path(@ramal), class:"btn btn-outline-primary mb-3" if user_signed_in? %>
+  <%= link_to "Voltar", ramais_path, class:"btn btn-outline-success mb-3" %>
+  <%= button_to "", @ramal, method: :delete, class:"btn btn-danger mb-3 bi-trash3 mb-3" if user_signed_in? %>
 </div>
