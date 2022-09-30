@@ -14,6 +14,10 @@ class RamalPolicy < ApplicationPolicy
     true
   end
 
+  def import_ramais
+    user&.id
+  end
+  
   def update?
     user&.id == record.user.id
   end

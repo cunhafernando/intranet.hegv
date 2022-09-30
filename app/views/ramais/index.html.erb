@@ -9,24 +9,25 @@
       
       </div>
   </div>
+  <% if current_user && current_user.admin? %>
+    <%= link_to "Novo Ramal", new_ramal_path, class:"btn btn-outline-primary" if user_signed_in? %>
+  <% end %>
 
-  <%= link_to "Novo Ramal", new_ramal_path, class:"btn btn-outline-primary" %>
-
-  <table id="table" data-toggle="table" data-search="true" data-show-columns="true" class="table table-striped">
+  <table id="table" data-toggle="table" data-search="true" data-show-columns="true" class="table">
   <thead>
-    <tr>
+    <tr class="tr-class-1">
       <th scope="col" data-field="setor" data-valign="middle"><strong>Setor</strong></th>
       <th scope="col" data-field="telefone" data-valign="middle"><strong>Número</strong></th>
       <th scope="col" data-field="email" data-valign="middle"><strong>Email</strong></th>
       <th scope="col" data-field="departamento" data-valign="middle"><strong>Departamento</strong></th>
       <th scope="col" data-field="mostrar" data-valign="middle"><strong></strong></th>
-      <%  if user_signed_in? %>
+      <%  if current_user && current_user.admin? %>
         <th scope="col" data-field="editar" data-valign="middle"><strong></strong></th>
         <th scope="col" data-field="apagar" data-valign="middle"><strong></strong></th>
       <% end %>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     <% @ramais.each do |ramal| %>
       <tr>
         <th><%= ramal.setor %></th>
@@ -34,9 +35,9 @@
         <th><%= ramal.email %></th>
         <th><%= ramal.departamento %></th>
         <th><%= link_to "", ramal, class: "btn btn-primary bi bi-box-arrow-right mb-3" %></th>
-        <%  if user_signed_in? %>
-          <th><%= link_to "", edit_ramal_path(ramal), class:"btn btn-secondary mb-3 bi bi-pencil-square" %></th>
-          <th><%= button_to "", ramal, method: :delete, class:"btn btn-danger mb-3 bi-trash3 mb-3" %></th>
+        <%  if current_user && current_user.admin? %>
+          <th><%= link_to "", edit_ramal_path(ramal), class:"btn btn-secondary mb-3 bi bi-pencil-square" if user_signed_in? %></th>
+          <th><%= button_to "", ramal, method: :delete, class:"btn btn-danger mb-3 bi bi-trash3 mb-3" if user_signed_in? %></th>
         <% end %>
         
       </tr>
@@ -44,21 +45,4 @@
   </tbody>
 </table>
   
-<script>
-  var $table = $('#table')
 
-  $(function() {
-    $table.bootstrapTable()
-
-    $('.toolbar input').change(function () {
-      var classes = []
-      $('.toolbar input:checked').map(function () {
-        classes.push($(this).next().text())
-      })
-
-      $table.bootstrapTable('refreshOptions', {
-        classes: classes.join(' ')
-      })
-    })
-  })
-</script>

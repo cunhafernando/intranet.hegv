@@ -4,7 +4,7 @@ class RamaisController < ApplicationController
 
   # GET /ramais or /ramais.json
   def index
-    @ramais = Ramal.order(setor: :asc)
+    @ramais = Ramal.all
   end
 
   # GET /ramais/1 or /ramais/1.json
@@ -26,12 +26,12 @@ class RamaisController < ApplicationController
       header = spreadsheet.row(1)
       ## We are iterating from row 2 because we have left row one for header
       (2..spreadsheet.last_row).each do |i|
-        Ramal.create(setor: spreadsheet.row(i)[0], telefone: spreadsheet.row(i)[1], email: spreadsheet.row(i)[2], departamento: spreadsheet.row(i)[3])
+        @ramal = current_user.ramais.create(setor: spreadsheet.row(i)[0], telefone: spreadsheet.row(i)[1], email: spreadsheet.row(i)[2], departamento: spreadsheet.row(i)[3])
       end
       flash[:notice] = "Lista importada"
       redirect_to ramais_path 
     rescue Exception => e
-      flash[:notice] = "Problemas com o arquivo"
+      flash[:alert] = "Problemas com o arquivo"
       redirect_to ramais_path 
     end
  end
