@@ -91,11 +91,16 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  old_verbose = $VERBOSE
+  $VERBOSE = nil
+
   Date::MONTHNAMES = [nil] + %w(Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro)  
   Date::DAYNAMES = %w(Domingo Segunda-Feira Terça-Feira Quart-Feira Quinta-Feira Sexta-Feira Sábado)  
   Date::ABBR_MONTHNAMES = [nil] + %w(Jan Fev Mar Abr Mai Jun Jul Aug Sep Out Nov Dez)  
   Date::ABBR_DAYNAMES = %w(Dom Seg Ter Qua Qui Sex Sab)
-
+  
+  $VERBOSE = old_verbose
+  
   class Time  
     alias :strftime_nolocale :strftime  
     def strftime(format)  
@@ -113,7 +118,7 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'gmail.com',
-    user_name:            Rails.application.credentials.gmail[:user_name],
+    user_name:            Rails.application.credential.gmail[:user_name],
     password:             Rails.application.credential.gmail[:password],
     authentication:       'plain',
     enable_starttls_auto: true,
