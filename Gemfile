@@ -43,3 +43,7 @@ gem 'rolify', '~> 6.0'
 gem "groupdate", "~> 6.1"
 gem "roo", "~> 2.9"
 gem "roo-xls", "~> 1.2"
+gem 'capistrano', '~> 3.17', '>= 3.17.1'
+gem 'capistrano-rails', '~> 1.6', '>= 1.6.2'
+gem 'capistrano-passenger', '~> 0.2.1'
+gem 'capistrano-rbenv', '~> 2.2'
