@@ -6,8 +6,7 @@ class User < ApplicationRecord
   has_many :ramais, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise  :confirmable,
-          :database_authenticatable, 
+  devise  :database_authenticatable, 
           :registerable,
           :recoverable, 
           :rememberable,
